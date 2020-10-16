@@ -1,0 +1,14 @@
+#Cluster Configuration
+
+[one]
+username = <insert_your_username>
+password = <insert_your_password>
+endpoint = https://api.hpccloud.surfsara.nl/RPC2
+
+[ssh]
+root_public_key = /Users/eslt0101/Projects/REPOS/eScience/GO/marzipan/id_rsa_lokum_root.key.pub
+
+[cluster]
+VMtemplate = /Users/eslt0101/Projects/REPOS/eScience/GO/marzipan/opennebula_goera.tpl
+basename = go_era
+numberVMs = 2
