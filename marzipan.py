@@ -99,7 +99,7 @@ class one_interface(object):
                 inprogress = 0
                 print('All cluster VMs in state RUNNING')
             else:
-                wait(10)
+                time.sleep(10)
                 print('Cluster initialization in progress...')
                 elapsed_time = time.time() - tzero
                 print('elapsed time : ',elapsed_time)
