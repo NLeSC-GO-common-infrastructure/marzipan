@@ -12,13 +12,14 @@ class one_interface(object):
         self.template = None
         self.template_id = None
         self.cluster_vm_ids = []
+        self.cluster_vm_ips = []
 
     def get_config(self):
         """
         Read configuration options from file
         """
         Config = configparser.ConfigParser()
-        Config.read('ClusterConf.ini')
+        Config.read('config/ClusterConf.ini')
         self.config = Config
 
     def get_one_server(self):
@@ -28,8 +29,8 @@ class one_interface(object):
         uname = self.config['one']['username']
         pwd = self.config['one']['password']
         endpoint = self.config['one']['endpoint']
-        one_server = pyone.OneServer(endpoint, session = uname+':'+pwd)
-        self.client = one_server
+        one_client = pyone.OneServer(endpoint, session = uname+':'+pwd)
+        self.client = one_client
 
     def get_public_key(self):
         """
@@ -77,7 +78,21 @@ class one_interface(object):
         """
         for j in range(int(self.config['cluster']['numberVMs'])):
             vmj_id = self.create_one_vm(j)
+            vmj_ip = self.client.vm.info(vmj_id).TEMPLATE['NIC']['IP']
             self.cluster_vm_ids.append(vmj_id)
+            self.cluster_vm_ips.append(vmj_ip)
+
+    def serialize_one_vm_ips(self):
+        """
+        serialize list of vm ips to file as comma separated list on single line
+        """
+        fname = self.config['cluster']['basename']+'_IPs.dat'
+        with open(fname,'w') as ips_file:
+            for i, ip in enumerate(self.cluster_vm_ips):
+                if i == len(self.cluster_vm_ips) -1:
+                    ips_file.write(ip)
+                else:
+                    ips_file.write(ip+',')
 
     def monitor_cluster_vm_states(self):
         """
@@ -99,8 +114,8 @@ class one_interface(object):
                 inprogress = 0
                 print('All cluster VMs in state RUNNING')
             else:
-                wait(10)
-                print('Cluster initialization in progress...')
+                time.sleep(10)
+                print('Waiting for cluster VMs ...')
                 elapsed_time = time.time() - tzero
                 print('elapsed time : ',elapsed_time)
                 if elapsed_time > 120. :
@@ -109,20 +124,39 @@ class one_interface(object):
                     print('lcmstates: ', lcmstates)
                     inprogress = 0
 
-def main():
-"""
-Complete automated workflow to deploy VM cluster if running marzipan.py as script
-"""
+def deploy_cluster():
+    """
+    Complete automated workflow to deploy VM cluster if running marzipan.py as script
+    """
+    print("initializing interface ...")
     surfone = one_interface()
+    print("reading configuration file ...")
     surfone.get_config()
+    print("retrieving publuc key ...")
     surfone.get_public_key()
+    print("reading template ...")
     surfone.get_template()
+    print("connecting to ONE server ...")
     surfone.get_one_server()
+    print("creating template on ONE ...")
     surfone.create_one_template()
+    print("instantiating cluster of VMs ...")
     surfone.create_one_vm_cluster()
+    print("monitoring vm states ...")
     surfone.monitor_cluster_vm_states()
+    print("serializing IPs ...")
+    surfone.serialize_one_vm_ips()
+    print("cluster IDs are : ")
+    print(surfone.cluster_vm_ids)
+    print("cluster IPs are : ")
+    print(surfone.cluster_vm_ips)
+    return surfone
 
-
+def main():
+    """
+    Run automated deployment as externally called script
+    """
+    _ = deploy_cluster()
 
 if __name__ == '__main__':
     main()
