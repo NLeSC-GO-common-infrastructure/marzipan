@@ -6,7 +6,7 @@ marzipan consists of the core marzipan.py python [module][## Usage]  providing a
 ## Usage
 To make use of `marzipan` the user should clone this repository to their local system. From with the `Docker` subdirectory the `nlesc/marzipan` Docker image can be built by running
 ```bash
-./build_marzipan.#!/bin/sh
+./build_marzipan.sh
 ```
 which create the image with tag `latest`.
 
@@ -14,7 +14,7 @@ The docker framework can then be used to instantiate abd provision a cluster of 
 ```bash
 ./deployCluster.sh
 ```
-from the root directory of the repository. The `root` and `ubuntu` user ssh keys generated for the cluster, as well as the `hosts.yaml` file enaabling provisioning with the `emma` platform leveraging `ansible` are written to the deployments directory in a subfolder wiith the clusters name. They can be used to subsequently interact with the cluster.
+from the root directory of the repository. The `root` and `ubuntu` user ssh keys generated for the cluster, as well as the `hosts.yaml` file enabling provisioning with the `emma` platform leveraging `ansible` are written to the `deployments` directory in a subfolder wiith the clusters name. They can be used to subsequently interact with the cluster.
 
 We note that the user should modify the `ClusterConf.ini` file located in the `config` folder to mach their requirements, and that they may wissh to adapt the `opennebula_goera.tpl` file provided in the `templates` folder as well. This should be done before executing `.deployCluster.sh`.
 
