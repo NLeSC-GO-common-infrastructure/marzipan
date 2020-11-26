@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import subprocess
+import time
 from Marzipan.marzipan import deploy_cluster
 import inventory_builder.inventory as invb
 
@@ -16,6 +17,13 @@ deploymentFolder = surfone.config["cluster"]["basename"]+"-cluster"
 deploymentFolderPath = "/marzipan/deployments/"+deploymentFolder
 rc = subprocess.run(["mv","/marzipan/deployments/tmp",deploymentFolderPath])
 
+#copy keys for emma compatability
+rc = subprocess.run(["cp","-v",deploymentFolderPath+"/id_rsa_marzipan_ubuntu.key","/marzipan/emma/files/"+deploymentFolder+".key"])
+rc = subprocess.run(["cp","-v",deploymentFolderPath+"/id_rsa_marzipan_ubuntu.key.pub","/marzipan/emma/files/"+deploymentFolder+".key.pub"])
+rc = subprocess.run(["cp","-v",deploymentFolderPath+"/id_rsa_marzipan_ubuntu.key","/marzipan/emma/files/hadoop_id_rsa"])
+rc = subprocess.run(["cp","-v",deploymentFolderPath+"/id_rsa_marzipan_ubuntu.key.pub","/marzipan/emma/files/hadoop_id_rsa.pub"])
+
+
 CONFIG_FILE = deploymentFolderPath+'/hosts.yaml'
 invb.HOST_PREFIX = surfone.config["cluster"]["basename"]
 invb.DEBUG = True
@@ -23,6 +31,8 @@ invb.DEBUG = True
 from inventory_builder.inventory import MarzipanInventory
 
 MarzipanInventory(surfone.cluster_vm_ips, CONFIG_FILE)
+
+time.sleep(10)
 
 print("run provisioning with ansible here")
 
@@ -42,7 +52,7 @@ print(ansible_update_hosts_command)
 os.system(ansible_update_hosts_command)
 
 #configure fire wall
-ansible_firewall_command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -b --become-user=root -i "+CONFIG_FILE+" -e cluster="+deploymentFolder+" /marzipan/marzipan_ansible/ansible_playbooks/set_ssh_keys.yml --private-key="+deploymentFolderPath+"/id_rsa_marzipan_root.key -v -c paramiko"
+ansible_firewall_command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -b --become-user=root -i "+CONFIG_FILE+" -e cluster="+deploymentFolder+" /marzipan/marzipan_ansible/ansible_playbooks/firewall.yml --private-key="+deploymentFolderPath+"/id_rsa_marzipan_root.key -v -c paramiko"
 print(ansible_firewall_command)
 os.system(ansible_firewall_command)
 
@@ -67,9 +77,9 @@ os.system(ansible_prep_cloud_command)
 
 
 #install platform (light)
-#ansible_install_platform_command = "ANSIBLE_HOST_KEY_CHECKING=False; cd /marzipan/emma/vars; sh ./create_vars_files.sh; cd /marzipan/emma; ansible-playbook -i "+CONFIG_FILE+" --extra-vars CLUSTER_NAME="+deploymentFolder+" install_platform_light.yml --tags 'common,dask' --skip-tags 'minio, hadoop, spark, jupyterhub,pdal,geotrellis,cassandra,geomesa' --private-key="+deploymentFolderPath+"/id_rsa_marzipan_ubuntu.key -v"
-#print(ansible_install_platform_command)
-#os.system(ansible_install_platform_command)
+ansible_install_platform_command = "ANSIBLE_HOST_KEY_CHECKING=False; cd /marzipan/emma/vars; sh ./create_vars_files.sh; cd /marzipan/emma; ansible-playbook -i "+CONFIG_FILE+" --extra-vars CLUSTER_NAME="+deploymentFolder+" install_platform_light.yml --tags 'common,dask' --skip-tags 'minio, hadoop, spark, jupyterhub,pdal,geotrellis,cassandra,geomesa' --private-key="+deploymentFolderPath+"/id_rsa_marzipan_ubuntu.key -v"
+print(ansible_install_platform_command)
+os.system(ansible_install_platform_command)
 
 
 """
