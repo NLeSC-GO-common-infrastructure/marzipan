@@ -108,7 +108,9 @@ class MarzipanInventory(object):
 
         if changed_hosts:
             changed_hosts = self.range2ips(changed_hosts)
+            print('changed hosts : ',changed_hosts)
             self.hosts = self.build_hostnames(changed_hosts)
+            print('hosts : ',self.hosts)
             self.purge_invalid_hosts(self.hosts.keys(), PROTECTED_NAMES)
 
             # all_vars = {'heketi_admin_key': HEKETI_ADMIN_KEY, 'heketi_user_key': HEKETI_USER_KEY}
@@ -177,7 +179,8 @@ class MarzipanInventory(object):
 
     def build_hostnames(self, changed_hosts):
         existing_hosts = OrderedDict()
-        highest_host_id = 0
+        highest_host_id = -1
+        print('highest_host_id',highest_host_id)
         try:
             for host in self.yaml_config['all']['hosts']:
                 existing_hosts[host] = self.yaml_config['all']['hosts'][host]
@@ -188,6 +191,7 @@ class MarzipanInventory(object):
             pass
 
         # FIXME(mattymo): Fix condition where delete then add reuses highest id
+        print('highest_host_id',highest_host_id)
         next_host_id = highest_host_id + 1
 
         all_hosts = existing_hosts.copy()
@@ -214,6 +218,7 @@ class MarzipanInventory(object):
                     continue
 
                 next_host = "{0}{1}".format(HOST_PREFIX, next_host_id)
+                print('next_host',next_host)
                 next_host_id += 1
                 all_hosts[next_host] = {'ansible_host': access_ip,
                                         'ip': ip,
