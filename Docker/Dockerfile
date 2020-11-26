@@ -30,7 +30,7 @@ COPY marzipan_ansible /marzipan/marzipan_ansible
 RUN mv /marzipan/marzipan_scripts/marzipan_deploy.py /marzipan/marzipan_deploy.py
 
 # clone emma repo
-RUN git clone https://github.com/NLeSC-GO-common-infrastructure/emma.git
+RUN git clone https://github.com/NLeSC-GO-common-infrastructure/emma.git && cd emma && git checkout emma_marzipan
 
 
 #RUN ln -s /marzipan/marzipan_scripts/marzipan_deploy.py /marzipan/marzipan_deploy.py
