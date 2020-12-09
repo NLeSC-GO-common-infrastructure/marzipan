@@ -77,16 +77,7 @@ os.system(ansible_prep_cloud_command)
 
 
 #install platform (light)
-ansible_install_platform_command = "ANSIBLE_HOST_KEY_CHECKING=False; cd /marzipan/emma/vars; sh ./create_vars_files.sh; cd /marzipan/emma; ansible-playbook -i "+CONFIG_FILE+" --extra-vars CLUSTER_NAME="+deploymentFolder+" install_platform_light.yml --tags 'common,dask' --skip-tags 'minio, hadoop, spark, jupyterhub,pdal,geotrellis,cassandra,geomesa' --private-key="+deploymentFolderPath+"/id_rsa_marzipan_ubuntu.key -v"
+ansible_install_platform_command = "ANSIBLE_HOST_KEY_CHECKING=False; cd /marzipan/emma/vars; sh ./create_vars_files.sh; cd /marzipan/emma; ansible-playbook -i "+CONFIG_FILE+" --extra-vars CLUSTER_NAME="+deploymentFolder+" install_platform_light.yml --tags 'common, extra_python_packages, gdal, dask' --skip-tags 'minio, hadoop, spark, jupyterhub,pdal,geotrellis,cassandra,geomesa' --private-key="+deploymentFolderPath+"/id_rsa_marzipan_ubuntu.key -v"
 print(ansible_install_platform_command)
 os.system(ansible_install_platform_command)
-
-
-"""
-TO DO: add emma based provisioning
-should adpat prepcloud-playbook
-"""
-
-#emma prepcloud playbook
-#ansible_prep_cloud_command = "ANSIBLE_HOST_KEY_CHECKING=False; cd /marzipan/emma; ansible-playbook -b --become-user=root -i "+CONFIG_FILE+" -e datadisk=/dev/vdb -e cluster="+deploymentFolder+" prepcloud-playbook.yml --private-key="+deploymentFolderPath+"/id_rsa_marzipan_root.key -v -c paramiko"
 
