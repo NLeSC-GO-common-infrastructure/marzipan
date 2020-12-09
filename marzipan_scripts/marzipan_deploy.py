@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import sys
 import os
 import subprocess
 import time
@@ -10,7 +11,17 @@ os.chdir("/marzipan")
 rc = subprocess.run(["mkdir","-p","/marzipan/deployments/tmp"])
 rc = subprocess.run("/marzipan/marzipan_scripts/generate_keys.sh")
 
-surfone = deploy_cluster()
+try:
+	surfone = deploy_cluster()	
+except:
+	print('An unexpected error occurred:', sys.exc_info())
+	if 'NAME is already taken by' in str(sys.exc_info()[1]):
+		print('A cluster with your chosen name has already been instantiated and the template file exists. Please either choose a different name or remove the template in ONE')
+		sys.exit()
+	else:
+		raise
+	
+
 
 #construct command
 deploymentFolder = surfone.config["cluster"]["basename"]+"-cluster"
