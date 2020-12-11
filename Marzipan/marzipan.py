@@ -64,6 +64,22 @@ class one_interface(object):
             else:
                 pass
 
+    def delete_one_template(self,temp_id=None,delete_all=False):
+        """
+        delete ONE template. defaults to created template and preserves linked images
+        """
+        if temp_id == None:
+            temp_id = self.template_id
+
+        self.client.template.delete(temp_id, delete_all)
+        """
+        success, out, errcode = self.client.template.delete(temp_id, delete_all)
+        if success == True:
+            print('sucsessfully deleted template ',temp_id, out)
+        else:
+            print('failed to delete template ', temp_id, out)
+        """
+
     def create_one_vm(self,counter):
         """
         instantiate VMtemplate to VM
@@ -71,6 +87,28 @@ class one_interface(object):
         vm_name=self.config['cluster']['basename']+str(counter)
         vm_id = self.client.template.instantiate(self.template_id,vm_name)
         return vm_id
+
+    def terminate_one_vm_hard(self,vm_id):
+        """
+        issue terminate hard command to VM
+        """
+        self.client.vm.action('terminate-hard',vm_id)
+        """
+        success,out,errcode = self.client.vm.action('terminate-hard',vm_id)
+        if success == True:
+            print('sucsessfully terminated vm ',vm_id, out)
+        else:
+            print('failed to terminate vm ', vm_id, out)
+        """
+
+    def terminate_one_vm_cluster_hard(self):
+        """
+        terminate cluster consisting of multiple VMs
+        """
+        for _ , vmj_id in enumerate(self.cluster_vm_ids):
+            print('terminating vm ',vmj_id)
+            self.terminate_one_vm_hard(vmj_id)
+
 
     def create_one_vm_cluster(self):
         """
@@ -81,6 +119,7 @@ class one_interface(object):
             vmj_ip = self.client.vm.info(vmj_id).TEMPLATE['NIC']['IP']
             self.cluster_vm_ids.append(vmj_id)
             self.cluster_vm_ips.append(vmj_ip)
+
 
     def serialize_one_vm_ips(self):
         """
@@ -123,6 +162,13 @@ class one_interface(object):
                     print('states: ', states)
                     print('lcmstates: ', lcmstates)
                     inprogress = 0
+
+    def wipe_cluster(self):
+        """
+        termnates cluster and deletes created template
+        """
+        self.terminate_one_vm_cluster_hard()
+        self.delete_one_template()
 
 def deploy_cluster():
     """

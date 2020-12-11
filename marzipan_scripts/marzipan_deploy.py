@@ -16,16 +16,31 @@ try:
 except:
 	print('An unexpected error occurred:', sys.exc_info())
 	if 'NAME is already taken by' in str(sys.exc_info()[1]):
-		print('A cluster with your chosen name has already been instantiated and the template file exists. Please either choose a different name or remove the template in ONE')
+		print('A cluster with your chosen name has already been \
+			   instantiated and the template file exists. Please \
+			   either choose a different name or remove the \
+			   template in ONE')
 		sys.exit()
 	else:
 		raise
 	
 
 
-#construct command
+#construct deployment path
 deploymentFolder = surfone.config["cluster"]["basename"]+"-cluster"
 deploymentFolderPath = "/marzipan/deployments/"+deploymentFolder
+
+#check whether specified a cluster with the same name already exists (i.e if the specified path exists). If so, abort
+if os.path.isdir(deploymentFolderPath):
+	print('A Cluster with the same name has been instantiated before. \
+		   Although is has been removed from ONE files remain present \
+		   in the deployments sub-folder an will cause issues. \
+		   Please remove these and run anew.')
+	print('removing cluster and deleting created template...')
+	surfone.wipe_cluster()
+	print('Exiting...')
+	sys.exit()
+
 rc = subprocess.run(["mv","/marzipan/deployments/tmp",deploymentFolderPath])
 
 #copy keys for emma compatability
