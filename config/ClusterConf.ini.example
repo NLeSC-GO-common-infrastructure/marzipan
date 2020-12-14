@@ -1,0 +1,14 @@
+#Cluster Configuration
+
+[one]
+username = <insert_your_user_name>
+password = <insert_your_password>
+endpoint = https://api.hpccloud.surfsara.nl/RPC2 #adapt to your endpoint as needed. This is SURF HPC
+
+[ssh]
+root_public_key = /marzipan/deployments/tmp/id_rsa_marzipan_root.key.pub
+
+[cluster]
+VMtemplate = /marzipan/templates/opennebula_goera.tpl
+basename = go_era
+numberVMs = 2
