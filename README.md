@@ -1,3 +1,14 @@
+# Badges
+
+| fair-software.nl recommendations | Badge |
+|:-|:-:|
+| [1. Code Repository](https://fair-software.nl/recommendations/repository) | [![GitHub](https://img.shields.io/github/last-commit/NLeSC-GO-common-infrastructure/marzipan)](https://img.shields.io/github/last-commit/NLeSC-GO-common-infrastructure/marzipan) |
+| [2. License](https://fair-software.nl/recommendations/license) | [![License](https://img.shields.io/github/license/NLeSC-GO-common-infrastructure/marzipan)]((https://img.shields.io/github/license/NLeSC-GO-common-infrastructure/marzipan)) |
+| [3. Community Registry](https://fair-software.nl/recommendations/registry) | [![Research Software Directory]()]() |
+| [4. Enable Citation](https://fair-software.nl/recommendations/citation) | [![DOI]()]() |
+| [5. Code Quality Checklist](https://fair-software.nl/recommendations/checklist) | [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3754/badge)](https://bestpractices.coreinfrastructure.org/projects/3754)  |
+
+
 # marzipan
 Automated (SURF HPC) OpenNebula instantiation and provisioning
 
