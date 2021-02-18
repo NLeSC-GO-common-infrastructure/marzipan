@@ -82,7 +82,7 @@ emma based provisioninig
 ```
  The user is referred to the [`emma_marzipan` fork](https://github.com/NLeSC-GO-common-infrastructure/emma/tree/emma_marzipan) for supported options.
 
- __NOTE__: changes to the `marzipan_deploy.py` script require the [docker image](###3 Build Docker image) to be rebuilt before taking effect. 
+ __NOTE__: changes to the `marzipan_deploy.py` script require the [docker image](#3-build-docker-image) to be rebuilt before taking effect. 
 
 
 ## Access to the cluster
