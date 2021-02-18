@@ -12,20 +12,20 @@
 # marzipan
 Automated instantiation and deployment of (clusters of) virtual machine(s) on bare metal using the OpenNebula platform, as well as subsequent provisioning and deployment of services incl., e.g. Dask. 
 
-`marzipan` consists of the core `marzipan.py` python [module](##Usage) providing a high level interface to the OpenNebula cloud, as well as an accompanying [Docker framework]() and configurable [deployment scripts]() providing a fully automated instantiation and provisioning environment.
+`marzipan` consists of the core `marzipan.py` python [module](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/Marzipan) providing a high level interface to the OpenNebula cloud, as well as an accompanying [Docker framework](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/Docker) and configurable [deployment scripts](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/marzipan_scripts) providing a fully automated instantiation and provisioning environment.
 
-For provisioning marzipan makes use of the [`emma_marzipan` fork]() ansible playbooks.
+For provisioning marzipan makes use of the [`emma_marzipan` fork](https://github.com/NLeSC-GO-common-infrastructure/emma/tree/emma_marzipan) ansible playbooks.
 
-`marzipan` is based off and strongly draws from [`Lokum`](), but is updated to make use of current versions of Ansible as well as python 3, and circumvents recurrent synchronicity and timeout issues arsing from the interplay of terraform, the runtastic OpenNebula provider for terraform, and various (legacy) OpenNebula versions.
+`marzipan` is based off and strongly draws from [`Lokum`](https://github.com/NLeSC/lokum), but is updated to make use of current versions of Ansible as well as python 3, and circumvents recurrent synchronicity and timeout issues arsing from the interplay of terraform, the runtastic OpenNebula provider for terraform, and various (legacy) OpenNebula versions.
 
 `marzipan` has been tested on the SURFsara HPC cloud, but should work for any OpenNebula platform.
 
 ## Technologies and tools
 
-- [OpenNebula]()
-- [Docker]()
-- [Ansible]()
-- [emma_marzipan fork]() of [emma]()
+- [OpenNebula](https://opennebula.io)
+- [Docker](https://www.docker.com)
+- [Ansible](https://www.ansible.com)
+- [emma_marzipan fork](https://github.com/NLeSC-GO-common-infrastructure/emma/tree/emma_marzipan) of [emma](https://github.com/nlesc-sherlock/emma)
 
 
 
@@ -39,11 +39,11 @@ The user should modify the `ClusterConf.ini` file located in the [`config`]() su
 
 #### 2.1 configuration
 The `ClusterConf.ini` file enables the user to set desired configuration values such as the number of nodes, the name of the VMs, the OpenNebula endpoint and their credentials.
-The [`config`]() subdirectory of the repository includes a file `ClusterConf.ini.example` which can be appropriately modified and subsequently renamed.
+The [`config`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/config) subdirectory of the repository includes a file `ClusterConf.ini.example` which can be appropriately modified and subsequently renamed.
 
 #### 2.2 template
 The user must supply a template file specifiying the desired configuration for the VM(s) to be created.
-An example, `opennebula_goera.tpl`, is provided in the `templates` subfolder of the repository. 
+An example, `opennebula_goera.tpl`, is provided in the [`templates`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/templates) subfolder of the repository. 
 In particular, the following fields will require modification:
 ```
 CONTEXT = [
@@ -59,7 +59,7 @@ Please bear in mind, that the base image for the OS disk must be made available 
 
 
 ### 3 Build Docker image
-Change directories to the [`Docker`]() subdirectory.
+Change directories to the [`Docker`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/Docker) subdirectory.
 Build the `nlesc/marzipan` docker image by running
 ```bash
 ./build_marzipan.sh
@@ -80,7 +80,7 @@ The user can adapt the provisioning by modifying the `marzipan_deploy.py` script
 emma based provisioninig 
 """
 ```
- The user is referred to the [`emma_marzipan` fork]() for supported options.
+ The user is referred to the [`emma_marzipan` fork](https://github.com/NLeSC-GO-common-infrastructure/emma/tree/emma_marzipan) for supported options.
 
  __NOTE__: changes to the `marzipan_deploy.py` script require the [docker image](###3 Build Docker image) to be rebuilt before taking effect. 
 
@@ -112,6 +112,6 @@ When run as a script or by invoking the full deployment method `mazipan` will co
 
 ## Reference/Documentation
 
-[OpenNebula 5.2 Documentation for the XML-RPC API][http://docs.opennebula.io/5.2/integration/system_interfaces/api.html#actions-for-templates-management]
+[OpenNebula 5.2 Documentation for the XML-RPC API](http://docs.opennebula.io/5.2/integration/system_interfaces/api.html#actions-for-templates-management)
 
-[PYONE bindings documentation][http://docs.opennebula.io/5.12/integration/system_interfaces/python.html]
+[PYONE bindings documentation](http://docs.opennebula.io/5.12/integration/system_interfaces/python.html)
