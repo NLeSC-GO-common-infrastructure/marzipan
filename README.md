@@ -10,24 +10,88 @@
 
 
 # marzipan
-Automated (SURF HPC) OpenNebula instantiation and provisioning
+Automated instantiation and deployment of (clusters of) virtual machine(s) on bare metal using the OpenNebula platform, as well as subsequent provisioning and deployment of services incl., e.g. Dask. 
 
-marzipan consists of the core marzipan.py python [module][## Usage]  providing a high level interface to the (SURFsara) OpenNebula cloud, as well as an accompanying Docker framework providing a fully automated instantiation and provisioning environment.
+`marzipan` consists of the core `marzipan.py` python [module](##Usage) providing a high level interface to the OpenNebula cloud, as well as an accompanying [Docker framework]() and configurable [deployment scripts]() providing a fully automated instantiation and provisioning environment.
+
+For provisioning marzipan makes use of the [`emma_marzipan` fork]() ansible playbooks.
+
+`marzipan` is based off and strongly draws from [`Lokum`](), but is updated to make use of current versions of Ansible as well as python 3, and circumvents recurrent synchronicity and timeout issues arsing from the interplay of terraform, the runtastic OpenNebula provider for terraform, and various (legacy) OpenNebula versions.
+
+`marzipan` has been tested on the SURFsara HPC cloud, but should work for any OpenNebula platform.
+
+## Technologies and tools
+
+- [OpenNebula]()
+- [Docker]()
+- [Ansible]()
+- [emma_marzipan fork]() of [emma]()
+
+
 
 ## Usage
-To make use of `marzipan` the user should clone this repository to their local system. From with the `Docker` subdirectory the `nlesc/marzipan` Docker image can be built by running
+
+### 1 Clone repository 
+To make use of `marzipan` the user should clone this repository to their local system. Further instructions on the use of `marzipan` assume a full replica of the repository on the users local system. 
+
+### 2 Adjust configuration and template
+The user should modify the `ClusterConf.ini` file located in the [`config`]() subdirectory, as well as the `opennebula_goera.tpl` file in the [`templates`]() subdirectory to match their requirements.
+
+#### 2.1 configuration
+The `ClusterConf.ini` file enables the user to set desired configuration values such as the number of nodes, the name of the VMs, the OpenNebula endpoint and their credentials.
+The [`config`]() subdirectory of the repository includes a file `ClusterConf.ini.example` which can be appropriately modified and subsequently renamed.
+
+#### 2.2 template
+The user must supply a template file specifiying the desired configuration for the VM(s) to be created.
+An example, `opennebula_goera.tpl`, is provided in the `templates` subfolder of the repository. 
+In particular, the following fields will require modification:
+```
+CONTEXT = [
+	GROUP = "your_group"]
+DISK = [
+    DATASTORE = "nameOfYourBaseImageDataStore"
+    DATASTORE_ID = "IDOfYourBaseImageDataStore"
+	IMAGE_ID ="IDOfYourBaseImage"
+]
+```
+
+Please bear in mind, that the base image for the OS disk must be made available for the user (with the credentials being used) before executing `marzipan`. This is up to the user and can be accomplished using the OpenNebula user interface. 
+
+
+### 3 Build Docker image
+Change directories to the [`Docker`]() subdirectory.
+Build the `nlesc/marzipan` docker image by running
 ```bash
 ./build_marzipan.sh
 ```
-which create the image with tag `latest`.
+This creates the image with tag set to `latest`
 
-The docker framework can then be used to instantiate abd provision a cluster of VMs by running
+### 4 Run Docker framework to instantiate and provision a (cluster of) VM(s)
+Change back to the root directory of the repository.
+The docker framework can then be used to instantiate and provision a cluster of VMs by running
 ```bash
 ./deployCluster.sh
 ```
-from the root directory of the repository. The `root` and `ubuntu` user ssh keys generated for the cluster, as well as the `hosts.yaml` file enabling provisioning with the `emma` platform leveraging `ansible` are written to the `deployments` directory in a subfolder wiith the clusters name. They can be used to subsequently interact with the cluster.
+. The `root` and `ubuntu` user ssh keys generated for the cluster, as well as the `hosts.yaml` file enabling provisioning with the `emma` platform leveraging `ansible` are written to the `deployments` subdirectory (is created on execution) in a subfolder with the clusters name. They can be used to subsequently interact with the cluster.
 
-We note that the user should modify the `ClusterConf.ini` file located in the `config` folder to mach their requirements, and that they may wissh to adapt the `opennebula_goera.tpl` file provided in the `templates` folder as well. This should be done before executing `.deployCluster.sh`.
+The user can adapt the provisioning by modifying the `marzipan_deploy.py` script in the `marzipan_scripts` subdirectory in the section below
+```
+"""
+emma based provisioninig 
+"""
+```
+ The user is referred to the [`emma_marzipan` fork]() for supported options.
+
+ __NOTE__: changes to the `marzipan_deploy.py` script require the [docker image](###3 Build Docker image) to be rebuilt before taking effect. 
+
+
+## Access to the cluster
+The cluster VMs can be accesed via ssh as `ubuntu` or `root` user, using the generated keys. For example:
+```bash
+ssh -i ./deployments/<clustername>/id_rsa_marzipan_root.key root@SERVER_IP
+or
+ssh -i ./deployments/<clustername>/id_rsa_marzipan_ubuntu.key ubuntu@SERVER_IP
+```
 
 
 ## The marzipan OpenNebula interface
@@ -43,7 +107,7 @@ Furthermore, the user should supply a template file specifying the desired VM co
 Finally, the user can provide a public ssh key file for the `root` user to be included with the template. Alternatively, the ssh key can be supplied in the `ClusterConf.ini` file.
 NOTE: if using the Docker framework, the use should refrain from, or take great care in, changing the settings relating to the ssh keys, as these are autogenerated during deployment.
 
-When run as a script or by invoking the full deployment method `mazipan` will construct a VM template in OpenNebula, and deploy the requested number of VMs based on this template. `marzipan` will then monitor the deployment, only reporting successful execution when all VMs are in the `RUNNING` LCM_STATE. If this has failed to complete after 120 seconds marziopan will exit, notifying the user of failure.
+When run as a script or by invoking the full deployment method `mazipan` will construct a VM template in OpenNebula, and deploy the requested number of VMs based on this template. `marzipan` will then monitor the deployment, only reporting successful execution when all VMs are in the `RUNNING` LCM_STATE. If this has failed to complete after 120 seconds marzipan will exit, notifying the user of failure.
 
 
 ## Reference/Documentation
