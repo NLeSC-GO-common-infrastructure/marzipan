@@ -1,4 +1,4 @@
-#Marzipan scripts
+# Marzipan scripts
 
 this subdirectory contains two helper scripts for the use of `marzipan` in automatically deploying a (cluster of) VM(s).
 
