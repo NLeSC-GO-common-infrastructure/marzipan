@@ -98,7 +98,7 @@ ssh -i ./deployments/<clustername>/id_rsa_marzipan_ubuntu.key ubuntu@SERVER_IP
 
 The core `marzipan.py` module (located in the `Marzipan` subfolder) provides the `one_interface` class. The class' methods provide a high level interface to set up a cluster of VMs on the (SURFsara) OpenNebula cloud.
 
-`marzipan.py` can be imported, poviding access to the class methods, or run as a script to fully automatedly set up a cluster of VMs. `marzipan.py` also provides a high level class method `deploy_cluster()` which corresponds to the execution as a script.
+`marzipan.py` can be imported, providing access to the class methods, or run as a script to fully automatedly set up a cluster of VMs. `marzipan.py` also provides a high level class method `deploy_cluster()` which corresponds to the execution as a script.
 
 `marzipan` is complemented by a `ClusterConf.ini` file (in `config`), where the user can set desired configuration values such as the number of nodes, the name of the VMs, the OpenNebula endpoint and their credentials. The repository includes a file `ClusterConf.ini.example` which can be appropriately modified and subsequently renamed.
 
