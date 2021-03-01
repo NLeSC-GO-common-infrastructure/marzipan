@@ -14,7 +14,7 @@ CONTEXT = [
   USERNAME = "root",
   GROUP = "eratosthenes-uu"]
 ```
-The group should be changed to the user's. __Note__ the `SSH_PUBLIC_KEY` is filled with a placeholder that filled by the automatically generated root public ssh key when using fully automatic deployment. Should the user wish deploy more manually this field can/should be modified
+The group should be changed to the user's. __Note__ the `SSH_PUBLIC_KEY` is filled with a placeholder that filled by the automatically generated root public ssh key when using fully automatic deployment. Should the user wish deploy more manually this field can/should be modified.
 
 ```
 DISK = [
@@ -24,7 +24,7 @@ DISK = [
   SIZE = "15360",
   TYPE = "fs"]
 ```
-This specifies the OS disk. The user MUST ensure that a base image (e.g. and Ubuntu server) exists in the specified datastore of the OpenNebula Platform with the specified `IMAGE_ID`. The size corresponds to the OS partition. 
+This specifies the OS disk. The user MUST ensure that a base image (e.g. and Ubuntu server) exists in the specified datastore of the OpenNebula Platform with the specified `IMAGE_ID`. The size corresponds to the OS partition.
 
 ```
 DISK = [
@@ -35,7 +35,7 @@ DISK = [
   TARGET = "vdb",
   TYPE = "fs" ]
 ```
-This section specifies the local HDD of the VM
+This section specifies the local HDD of the VM.
 
 ```
 DISK = [
@@ -46,14 +46,14 @@ DISK = [
   TARGET = "vdc",
   TYPE = "swap"]
 ```
-This section defiines a swap partition
+This section defines a swap partition.
 
 
 ```
 MEMORY = "32768"
 MEMORY_UNIT_COST = "MB"
 ```
-This specifies the VM's RAM allocation, anmd finally the following defines it's network connection. `NETWORK` and `NETWORK_UNAME` can be adpated, but this is not required
+This specifies the VM's RAM allocation, anmd finally the following defines it's network connection. `NETWORK` and `NETWORK_UNAME` can be adpated, but this is not required.
 
 ```
 NIC = [
