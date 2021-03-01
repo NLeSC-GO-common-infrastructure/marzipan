@@ -1,6 +1,6 @@
 # marzipan core module
 
-The core `marzipan.py` module leverages the [PYONE]() python bindings to the OpenNebula XML-RPC API to provide higer level abstrations for the steps required in instantiating a (cluster of) VM(s) on bare metal using the OpenNebula platform
+The core `marzipan.py` module leverages the [PYONE](http://docs.opennebula.io/5.12/integration/system_interfaces/python.html) python bindings to the OpenNebula XML-RPC API to provide higer level abstrations for the steps required in instantiating a (cluster of) VM(s) on bare metal using the OpenNebula platform
 
 `marzipan.py` provides the `one_interface` class with methods enabling the creation, deletion, instantiation, and termination  of templates and virtual machines.
 In additon, the module provides a function `deploy_cluster()` which can be called and will automatically handle spinning up a cluster as defined in the `ClusterConf.ini` and `opennebula_goera.tpl` configuration and template files.
