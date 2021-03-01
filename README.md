@@ -1,4 +1,54 @@
-# Badges
+.. list-table::
+   :widths: 25 25
+   :header-rows: 1
+
+   * - fair-software.nl recommendations
+     - Badges
+   * - \1. Code repository
+     - |GitHub Badge|
+   * - \2. License
+     - |License Badge|
+   * - \3. Community Registry
+     - |Research Software Directory Badge|
+   * - \4. Enable Citation
+     - |Zenodo Badge|
+   * - \5. Checklist
+     - |CII Best Practices Badge|
+   * - **Other best practices**
+     -
+   * - Continuous integration
+     - |Python Build| |PyPI Publish|
+
+.. |GitHub Badge| image:: https://img.shields.io/badge/github-repo-000.svg?logo=github&labelColor=gray&color=blue
+   :target: https://github.com/NLeSC-GO-common-infrastructure/marzipan
+   :alt: GitHub Badge
+
+.. |License Badge| image:: https://img.shields.io/github/license/NLeSC-GO-common-infrastructure/stac2webdav
+   :target: https://github.com/NLeSC-GO-common-infrastructure/marzipan
+   :alt: License Badge
+
+.. |Research Software Directory Badge| image:: https://img.shields.io/badge/rsd-marzipan-00a3e3.svg
+   :target: https://www.research-software.nl/software/marzipan
+   :alt: Research Software Directory Badge
+
+..
+    Goto https://zenodo.org/account/settings/github/ to enable Zenodo/GitHub integration.
+    After creation of a GitHub release at https://github.com/NLeSC-GO-common-infrastructure/marzipan/releases
+    there will be a Zenodo upload created at https://zenodo.org/deposit with a DOI, this DOI can be put in the Zenodo badge urls.
+    In the README, we prefer to use the concept DOI over versioned DOI, see https://help.zenodo.org/#versioning.
+.. |Zenodo Badge| image:: https://zenodo.org/badge/DOI/< replace with created DOI >.svg
+   :target: https://doi.org/<replace with created DOI>
+   :alt: Zenodo Badge
+
+..
+    A CII Best Practices project can be created at https://bestpractices.coreinfrastructure.org/en/projects/new
+.. |CII Best Practices Badge| image:: https://bestpractices.coreinfrastructure.org/projects/< replace with created project identifier >/badge
+   :target: https://bestpractices.coreinfrastructure.org/projects/< replace with created project identifier >
+   :alt: CII Best Practices Badge
+
+
+<!---
+## Badges
 
 | fair-software.nl recommendations | Badge |
 |:-|:-:|
@@ -7,12 +57,13 @@
 | [3. Community Registry](https://fair-software.nl/recommendations/registry) | [![Research Software Directory]()]() |
 | [4. Enable Citation](https://fair-software.nl/recommendations/citation) | [![DOI]()]() |
 | [5. Code Quality Checklist](https://fair-software.nl/recommendations/checklist) | [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3754/badge)](https://bestpractices.coreinfrastructure.org/projects/3754)  |
-
+--->
 
 # marzipan
-Automated instantiation and deployment of (clusters of) virtual machine(s) on bare metal using the OpenNebula platform, as well as subsequent provisioning and deployment of services incl., e.g. Dask. 
+Automated instantiation and deployment of (clusters of) virtual machine(s) on bare metal using the OpenNebula platform, as well as subsequent provisioning and deployment of services incl., e.g. Dask.
 
-`marzipan` consists of the core `marzipan.py` python [module](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/Marzipan) providing a high level interface to the OpenNebula cloud, as well as an accompanying [Docker framework](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/Docker) and configurable [deployment scripts](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/marzipan_scripts) providing a fully automated instantiation and provisioning environment.
+`marzipan` consists of the core `marzipan.py` python [module](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/Marzipan) providing a high level interface to the OpenNebula cloud,
+as well as an accompanying [Docker framework](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/Docker) and configurable [deployment scripts](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/marzipan_scripts) providing a fully automated instantiation and provisioning environment.
 
 For provisioning marzipan makes use of the [`emma_marzipan` fork](https://github.com/NLeSC-GO-common-infrastructure/emma/tree/emma_marzipan) ansible playbooks.
 
@@ -31,8 +82,8 @@ For provisioning marzipan makes use of the [`emma_marzipan` fork](https://github
 
 ## Usage
 
-### 1 Clone repository 
-To make use of `marzipan` the user should clone this repository to their local system. Further instructions on the use of `marzipan` assume a full replica of the repository on the users local system. 
+### 1 Clone repository
+To make use of `marzipan` the user should clone this repository to their local system. Further instructions on the use of `marzipan` assume a full replica of the repository on the users local system.
 
 ### 2 Adjust configuration and template
 The user should modify the `ClusterConf.ini` file located in the [`config`]() subdirectory, as well as the `opennebula_goera.tpl` file in the [`templates`]() subdirectory to match their requirements.
@@ -43,7 +94,7 @@ The [`config`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/i
 
 #### 2.2 template
 The user must supply a template file specifiying the desired configuration for the VM(s) to be created.
-An example, `opennebula_goera.tpl`, is provided in the [`templates`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/templates) subfolder of the repository. 
+An example, `opennebula_goera.tpl`, is provided in the [`templates`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/templates) subfolder of the repository.
 In particular, the following fields will require modification:
 ```
 CONTEXT = [
@@ -55,7 +106,7 @@ DISK = [
 ]
 ```
 
-Please bear in mind, that the base image for the OS disk must be made available for the user (with the credentials being used) before executing `marzipan`. This is up to the user and can be accomplished using the OpenNebula user interface. 
+Please bear in mind, that the base image for the OS disk must be made available for the user (with the credentials being used) before executing `marzipan`. This is up to the user and can be accomplished using the OpenNebula user interface.
 
 
 ### 3 Build Docker image
@@ -64,7 +115,7 @@ Build the `nlesc/marzipan` docker image by running
 ```bash
 ./build_marzipan.sh
 ```
-This creates the image with tag set to `latest`
+This creates the image with tag set to `latest`.
 
 ### 4 Run Docker framework to instantiate and provision a (cluster of) VM(s)
 Change back to the root directory of the repository.
@@ -82,7 +133,7 @@ emma based provisioninig
 ```
  The user is referred to the [`emma_marzipan` fork](https://github.com/NLeSC-GO-common-infrastructure/emma/tree/emma_marzipan) for supported options.
 
- __NOTE__: changes to the `marzipan_deploy.py` script require the [docker image](#3-build-docker-image) to be rebuilt before taking effect. 
+ __NOTE__: changes to the `marzipan_deploy.py` script require the [docker image](#3-build-docker-image) to be rebuilt before taking effect.
 
 
 ## Access to the cluster
