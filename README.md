@@ -48,11 +48,11 @@ An example, `opennebula_goera.tpl`, is provided in the [`templates`](https://git
 In particular, the following fields will require modification:
 ```
 CONTEXT = [
-	GROUP = "your_group"]
+    GROUP = "your_group"]
 DISK = [
     DATASTORE = "nameOfYourBaseImageDataStore"
     DATASTORE_ID = "IDOfYourBaseImageDataStore"
-	IMAGE_ID ="IDOfYourBaseImage"
+    IMAGE_ID ="IDOfYourBaseImage"
 ]
 ```
 
