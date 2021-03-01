@@ -36,7 +36,7 @@ For provisioning marzipan makes use of the [`emma_marzipan` fork](https://github
 To make use of `marzipan` the user should clone this repository to their local system. Further instructions on the use of `marzipan` assume a full replica of the repository on the users local system.
 
 ### 2 Adjust configuration and template
-The user should modify the `ClusterConf.ini` file located in the [`config`]() subdirectory, as well as the `opennebula_goera.tpl` file in the [`templates`]() subdirectory to match their requirements.
+The user should modify the `ClusterConf.ini` file located in the [`config`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/config) subdirectory, as well as the `opennebula_goera.tpl` file in the [`templates`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/templates) subdirectory to match their requirements.
 
 #### 2.1 configuration
 The `ClusterConf.ini` file enables the user to set desired configuration values such as the number of nodes, the name of the VMs, the OpenNebula endpoint and their credentials.
@@ -44,7 +44,7 @@ The [`config`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/i
 
 #### 2.2 template
 The user must supply a template file specifiying the desired configuration for the VM(s) to be created.
-An example, `opennebula_goera.tpl`, is provided in the [`templates`](https://github.com/NLeSC-GO-common-infrastructure/marzipan/tree/improve-documentation/templates) subfolder of the repository.
+An example, `opennebula_goera.tpl`, is provided in the [`templates`](./templates) subfolder of the repository.
 In particular, the following fields will require modification:
 ```
 CONTEXT = [
