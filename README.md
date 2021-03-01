@@ -1,62 +1,11 @@
-<!---
-.. list-table::
-   :widths: 25 25
-   :header-rows: 1
-
-   * - fair-software.nl recommendations
-     - Badges
-   * - \1. Code repository
-     - |GitHub Badge|
-   * - \2. License
-     - |License Badge|
-   * - \3. Community Registry
-     - |Research Software Directory Badge|
-   * - \4. Enable Citation
-     - |Zenodo Badge|
-   * - \5. Checklist
-     - |CII Best Practices Badge|
-   * - **Other best practices**
-     -
-   * - Continuous integration
-     - |Python Build| |PyPI Publish|
-
-.. |GitHub Badge| image:: https://img.shields.io/badge/github-repo-000.svg?logo=github&labelColor=gray&color=blue
-   :target: https://github.com/NLeSC-GO-common-infrastructure/marzipan
-   :alt: GitHub Badge
-
-.. |License Badge| image:: https://img.shields.io/github/license/NLeSC-GO-common-infrastructure/stac2webdav
-   :target: https://github.com/NLeSC-GO-common-infrastructure/marzipan
-   :alt: License Badge
-
-.. |Research Software Directory Badge| image:: https://img.shields.io/badge/rsd-marzipan-00a3e3.svg
-   :target: https://www.research-software.nl/software/marzipan
-   :alt: Research Software Directory Badge
-
-..
-    Goto https://zenodo.org/account/settings/github/ to enable Zenodo/GitHub integration.
-    After creation of a GitHub release at https://github.com/NLeSC-GO-common-infrastructure/marzipan/releases
-    there will be a Zenodo upload created at https://zenodo.org/deposit with a DOI, this DOI can be put in the Zenodo badge urls.
-    In the README, we prefer to use the concept DOI over versioned DOI, see https://help.zenodo.org/#versioning.
-.. |Zenodo Badge| image:: https://zenodo.org/badge/DOI/< replace with created DOI >.svg
-   :target: https://doi.org/<replace with created DOI>
-   :alt: Zenodo Badge
-
-..
-    A CII Best Practices project can be created at https://bestpractices.coreinfrastructure.org/en/projects/new
-.. |CII Best Practices Badge| image:: https://bestpractices.coreinfrastructure.org/projects/< replace with created project identifier >/badge
-   :target: https://bestpractices.coreinfrastructure.org/projects/< replace with created project identifier >
-   :alt: CII Best Practices Badge
---->
-
-
-## Badges
+# Badges
 
 | fair-software.nl recommendations | Badge |
 |:-|:-:|
 | [1. Code Repository](https://fair-software.nl/recommendations/repository) | [![GitHub](https://img.shields.io/github/last-commit/NLeSC-GO-common-infrastructure/marzipan)](https://img.shields.io/github/last-commit/NLeSC-GO-common-infrastructure/marzipan) |
 | [2. License](https://fair-software.nl/recommendations/license) | [![License](https://img.shields.io/github/license/NLeSC-GO-common-infrastructure/marzipan)]((https://img.shields.io/github/license/NLeSC-GO-common-infrastructure/marzipan)) |
 | [3. Community Registry](https://fair-software.nl/recommendations/registry) | [![Research Software Directory](https://img.shields.io/badge/rsd-marzipan-00a3e3.svg)](https://www.research-software.nl/software/marzipan) |
-| [4. Enable Citation](https://fair-software.nl/recommendations/citation) | [![DOI](https://zenodo.org/badge/DOI/< replace with created DOI >.svg)](https://doi.org/<replace with created DOI>) |
+| [4. Enable Citation](https://fair-software.nl/recommendations/citation) | [![DOI](https://zenodo.org/badge/DOI/REPLACE_HERE.svg)](https://doi.org/REPALCE_HERE) |
 | [5. Code Quality Checklist](https://fair-software.nl/recommendations/checklist) | [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3754/badge)](https://bestpractices.coreinfrastructure.org/projects/3754)  |
 
 
