@@ -9,6 +9,6 @@ endpoint = https://api.hpccloud.surfsara.nl/RPC2 #adapt to your endpoint as need
 root_public_key = /marzipan/deployments/tmp/id_rsa_marzipan_root.key.pub
 
 [cluster]
-VMtemplate = /marzipan/templates/opennebula_goera.tpl
-basename = go_era
-numberVMs = 2
+VMtemplate = /marzipan/templates/opennebula_goera.tpl #adapt to your template
+basename = go_era #adapt to your chosen cluster name
+numberVMs = 2 #adapt accordsing to your desired number of VMs
