@@ -5,7 +5,7 @@
 | [1. Code Repository](https://fair-software.nl/recommendations/repository) | [![GitHub](https://img.shields.io/github/last-commit/NLeSC-GO-common-infrastructure/marzipan)](https://img.shields.io/github/last-commit/NLeSC-GO-common-infrastructure/marzipan) |
 | [2. License](https://fair-software.nl/recommendations/license) | [![License](https://img.shields.io/github/license/NLeSC-GO-common-infrastructure/marzipan)]((https://img.shields.io/github/license/NLeSC-GO-common-infrastructure/marzipan)) |
 | [3. Community Registry](https://fair-software.nl/recommendations/registry) | [![Research Software Directory](https://img.shields.io/badge/rsd-marzipan-00a3e3.svg)](https://www.research-software.nl/software/marzipan) |
-| [4. Enable Citation](https://fair-software.nl/recommendations/citation) | [![DOI](https://zenodo.org/badge/DOI/REPLACE_HERE.svg)](https://doi.org/REPALCE_HERE) |
+| [4. Enable Citation](https://fair-software.nl/recommendations/citation) | [![DOI](https://zenodo.org/badge/303491969.svg)](https://zenodo.org/badge/latestdoi/303491969) |
 | [5. Code Quality Checklist](https://fair-software.nl/recommendations/checklist) | [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3754/badge)](https://bestpractices.coreinfrastructure.org/projects/3754)  |
 
 
